@@ -75,7 +75,7 @@ return true;
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Student Registration </h2>
+						<h2 class="page-title">User Registration </h2>
 
 						<div class="row">
 							<div class="col-md-12">
@@ -88,7 +88,7 @@ return true;
 		<label class="col-sm-2 control-label"> Registration No : </label>
 		<div class="col-sm-8">
 
-		<input type="text" name="regno" id="regno"  class="form-control" required="required">
+		<input type="number" name="regno" id="regno"  class="form-control" required="required">
 
 		</div>
 		</div>
