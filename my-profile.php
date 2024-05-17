@@ -1,24 +1,38 @@
-<?php
+<?php 
 session_start();
-include('includes/config.php');
+
+$mysqli = new mysqli('localhost', 'root', '', 'hostel');
+
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
 date_default_timezone_set('Asia/Kolkata');
 include('includes/checklogin.php');
 check_login();
-$aid=$_SESSION['id'];
-if(isset($_POST['update']))
-{
 
-$fname=$_POST['fname'];
-$mname=$_POST['mname'];
-$lname=$_POST['lname'];
-$gender=$_POST['gender'];
-$contactno=$_POST['contact'];
-$udate = date('d-m-Y h:i:s', time());
-$query="update  userRegistration set firstName=?,middleName=?,lastName=?,gender=?,contactNo=?,updationDate=? where id=?";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('ssssisi',$fname,$mname,$lname,$gender,$contactno,$udate,$aid);
-$stmt->execute();
-echo"<script>alert('Profile updated Succssfully');</script>";
+$aid = $_SESSION['id'];
+
+if (isset($_POST['update'])) {
+    $fname = $_POST['fname'];
+    $mname = $_POST['mname'];
+    $lname = $_POST['lname'];
+    $gender = $_POST['gender'];
+    $contactno = $_POST['contact'];
+    $udate = date('d-m-Y h:i:s', time());
+
+    $query = "UPDATE userRegistration SET firstName=?, middleName=?, lastName=?, gender=?, contactNo=?, updationDate=? WHERE id=?";
+    $stmt = $mysqli->prepare($query);
+
+    if ($stmt) {
+        $stmt->bind_param('ssssisi', $fname, $mname, $lname, $gender, $contactno, $udate, $aid);
+        $stmt->execute();
+        echo "<script>alert('Profile updated Successfully');</script>";
+    } else {
+        echo "<script>alert('Error updating profile');</script>";
+    }
+
+    $stmt->close();
 }
 ?>
 
@@ -135,7 +149,6 @@ Last Updation date : &nbsp; <?php echo $row->updationDate;?>
 <label class="col-sm-2 control-label">Email id: </label>
 <div class="col-sm-8">
 <input type="email" name="email" id="email"  class="form-control" value="<?php echo $row->email;?>" readonly>
-<span id="user-availability-status" style="font-size:12px;"></span>
 </div>
 </div>
 <?php } ?>
@@ -172,34 +185,5 @@ Last Updation date : &nbsp; <?php echo $row->updationDate;?>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 </body>
-<script type="text/javascript">
-	$(document).ready(function(){
-        $('input[type="checkbox"]').click(function(){
-            if($(this).prop("checked") == true){
-                $('#paddress').val( $('#address').val() );
-                $('#pcity').val( $('#city').val() );
-                $('#pstate').val( $('#state').val() );
-                $('#ppincode').val( $('#pincode').val() );
-            } 
-            
-        });
-    });
-</script>
-	<script>
-function checkAvailability() {
-
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check_availability.php",
-data:'emailid='+$("#email").val(),
-type: "POST",
-success:function(data){
-$("#user-availability-status").html(data);
-$("#loaderIcon").hide();
-},
-error:function (){}
-});
-}
-</script>
 
 </html>
