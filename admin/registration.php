@@ -216,9 +216,9 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Registration No : </label>
 <div class="col-sm-8">
-<!-- onBlur="checkRegnoAvailability()" -->
+
 <input type="text" name="regno" id="regno"  class="form-control" required="required">
-<!-- <span id="user-reg-availability" style="font-size:12px;"></span> -->
+
 </div>
 </div>
 
@@ -267,9 +267,9 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Email id : </label>
 <div class="col-sm-8">
- <!-- onBlur="checkAvailability()"  -->
+
 <input type="email" name="email" id="email"  class="form-control" required="required">
-<span id="user-availability-status" style="font-size:12px;"></span>
+
 </div>
 </div>
 
@@ -452,46 +452,5 @@ error:function (){}
 });
 }
 </script>
-
-	<!-- <script>
-function checkAvailability() {
-
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check_availability.php",
-data:'emailid='+$("#email").val(),
-type: "POST",
-success:function(data){
-$("#user-availability-status").html(data);
-$("#loaderIcon").hide();
-},
-error:function ()
-{
-event.preventDefault();
-alert('error');
-}
-});
-}
-</script>
-	<script>
-function checkRegnoAvailability() {
-
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check_availability.php",
-data:'regno='+$("#regno").val(),
-type: "POST",
-success:function(data){
-$("#user-reg-availability").html(data);
-$("#loaderIcon").hide();
-},
-error:function ()
-{
-event.preventDefault();
-alert('error');
-}
-});
-}
-</script> -->
 
 </html>
