@@ -445,6 +445,7 @@ while($row=$res->fetch_object())
         });
     });
 </script>
+
 	<script>
 function checkAvailability() {
 $("#loaderIcon").show();
