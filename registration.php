@@ -72,92 +72,90 @@ return true;
 								<div class="panel panel-primary">
 									<div class="panel-heading">Fill all Info</div>
 									<div class="panel-body">
-			<form method="post" action="" name="registration" class="form-horizontal" onSubmit="return valid();">
-											
-										
+<form method="post" action="" name="registration" class="form-horizontal" onSubmit="return valid();">						
 
-<div class="form-group">
-<label class="col-sm-2 control-label"> Registration No : </label>
-<div class="col-sm-8">
+		<div class="form-group">
+		<label class="col-sm-2 control-label"> Registration No : </label>
+		<div class="col-sm-8">
 
-<input type="text" name="regno" id="regno"  class="form-control" required="required">
+		<input type="text" name="regno" id="regno"  class="form-control" required="required">
 
-</div>
-</div>
+		</div>
+		</div>
 
 
-<div class="form-group">
-<label class="col-sm-2 control-label">First Name : </label>
-<div class="col-sm-8">
-<input type="text" name="fname" id="fname"  class="form-control" required="required" >
-</div>
-</div>
+		<div class="form-group">
+		<label class="col-sm-2 control-label">First Name : </label>
+		<div class="col-sm-8">
+		<input type="text" name="fname" id="fname"  class="form-control" required="required" >
+		</div>
+		</div>
 
-<div class="form-group">
-<label class="col-sm-2 control-label">Middle Name : </label>
-<div class="col-sm-8">
-<input type="text" name="mname" id="mname"  class="form-control">
-</div>
-</div>
+		<div class="form-group">
+		<label class="col-sm-2 control-label">Middle Name : </label>
+		<div class="col-sm-8">
+		<input type="text" name="mname" id="mname"  class="form-control">
+		</div>
+		</div>
 
-<div class="form-group">
-<label class="col-sm-2 control-label">Last Name : </label>
-<div class="col-sm-8">
-<input type="text" name="lname" id="lname"  class="form-control" required="required">
-</div>
-</div>
+		<div class="form-group">
+		<label class="col-sm-2 control-label">Last Name : </label>
+		<div class="col-sm-8">
+		<input type="text" name="lname" id="lname"  class="form-control" required="required">
+		</div>
+		</div>
 
-<div class="form-group">
-<label class="col-sm-2 control-label">Gender : </label>
-<div class="col-sm-8">
-<select name="gender" class="form-control" required="required">
-<option value="">Select Gender</option>
-<option value="male">Male</option>
-<option value="female">Female</option>
-<option value="others">Others</option>
-</select>
-</div>
-</div>
+		<div class="form-group">
+		<label class="col-sm-2 control-label">Gender : </label>
+		<div class="col-sm-8">
+		<select name="gender" class="form-control" required="required">
+		<option value="">Select Gender</option>
+		<option value="male">Male</option>
+		<option value="female">Female</option>
+		<option value="others">Others</option>
+		</select>
+		</div>
+		</div>
 
-<div class="form-group">
-<label class="col-sm-2 control-label">Contact No : </label>
-<div class="col-sm-8">
-<input type="text" name="contact" id="contact"  class="form-control" required="required">
-</div>
-</div>
-
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Email id: </label>
-<div class="col-sm-8">
-<!-- onBlur="checkAvailability()"  -->
-<input type="email" name="email" id="email"  class="form-control" required="required">
-<!-- <span id="user-availability-status" style="font-size:12px;"></span> -->
-</div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Password: </label>
-<div class="col-sm-8">
-<input type="password" name="password" id="password"  class="form-control" required="required">
-</div>
-</div>
+		<div class="form-group">
+		<label class="col-sm-2 control-label">Contact No : </label>
+		<div class="col-sm-8">
+		<input type="text" name="contact" id="contact"  class="form-control" required="required">
+		</div>
+		</div>
 
 
-<div class="form-group">
-<label class="col-sm-2 control-label">Confirm Password : </label>
-<div class="col-sm-8">
-<input type="password" name="cpassword" id="cpassword"  class="form-control" required="required">
-</div>
-</div>
-						
+		<div class="form-group">
+		<label class="col-sm-2 control-label">Email id: </label>
+		<div class="col-sm-8">
+
+		<input type="email" name="email" id="email"  class="form-control" required="required">
+
+		</div>
+		</div>
+
+		<div class="form-group">
+		<label class="col-sm-2 control-label">Password: </label>
+		<div class="col-sm-8">
+		<input type="password" name="password" id="password"  class="form-control" required="required">
+		</div>
+		</div>
+
+
+		<div class="form-group">
+		<label class="col-sm-2 control-label">Confirm Password : </label>
+		<div class="col-sm-8">
+		<input type="password" name="cpassword" id="cpassword"  class="form-control" required="required">
+		</div>
+		</div>
+								
 
 
 
-<div class="col-sm-6 col-sm-offset-4">
-<button class="btn btn-default" type="reset">Reset</button>
-<input type="submit" name="submit" Value="Register" class="btn btn-primary">
-</div>
+		<div class="col-sm-6 col-sm-offset-4">
+		<button class="btn btn-default" type="reset">Reset</button>
+		<input type="submit" name="submit" Value="Register" class="btn btn-primary">
+		</div>
 </form>
 
 									</div>
@@ -182,45 +180,5 @@ return true;
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 </body>
-	<!-- <script>
-function checkAvailability() {
-
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check_availability.php",
-data:'emailid='+$("#email").val(),
-type: "POST",
-success:function(data){
-$("#user-availability-status").html(data);
-$("#loaderIcon").hide();
-},
-error:function ()
-{
-event.preventDefault();
-alert('error');
-}
-});
-}
-</script>
-	<script>
-function checkRegnoAvailability() {
-
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check_availability.php",
-data:'regno='+$("#regno").val(),
-type: "POST",
-success:function(data){
-$("#user-reg-availability").html(data);
-$("#loaderIcon").hide();
-},
-error:function ()
-{
-event.preventDefault();
-alert('error');
-}
-});
-}
-</script> -->
 
 </html>
