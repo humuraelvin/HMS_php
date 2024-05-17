@@ -3,7 +3,7 @@ session_start();
 include('includes/config.php');
 include('includes/checklogin.php');
 check_login();
-//code for registration
+
 if(isset($_POST['submit']))
 {
 $roomno=$_POST['room'];
@@ -32,17 +32,7 @@ $paddress=$_POST['paddress'];
 $pcity=$_POST['pcity'];
 $pstate=$_POST['pstate'];
 $ppincode=$_POST['ppincode'];
-	$result ="SELECT count(*) FROM userRegistration WHERE email=? || regNo=?";
-		$stmt = $mysqli->prepare($result);
-		$stmt->bind_param('ss',$email,$regno);
-		$stmt->execute();
-$stmt->bind_result($count);
-$stmt->fetch();
-$stmt->close();
-if($count>0)
-{
-echo"<script>alert('Registration number or email id already registered.');</script>";
-}else{
+
 
 
 $query="insert into  registration(roomno,seater,feespm,foodstatus,stayfrom,duration,course,regno,firstName,middleName,lastName,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,corresPincode,pmntAddress,pmntCity,pmnatetState,pmntPincode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -58,7 +48,7 @@ $stmt1->bind_param('sssssiss',$regno,$fname,$mname,$lname,$gender,$contactno,$em
 $stmt1->execute();
 echo"<script>alert('Student Succssfully register');</script>";
 }
-}
+
 ?>
 
 <!doctype html>
@@ -89,7 +79,7 @@ type: "POST",
 url: "get_seater.php",
 data:'roomid='+val,
 success: function(data){
-
+//alert(data);
 $('#seater').val(data);
 }
 });
@@ -99,7 +89,7 @@ type: "POST",
 url: "get_seater.php",
 data:'rid='+val,
 success: function(data){
-
+//alert(data);
 $('#fpm').val(data);
 }
 });
@@ -227,8 +217,8 @@ while($row=$res->fetch_object())
 <label class="col-sm-2 control-label">Registration No : </label>
 <div class="col-sm-8">
 <!-- onBlur="checkRegnoAvailability()" -->
-<input type="text" name="regno" id="regno"  class="form-control" required="required"  >
-<span id="user-reg-availability" style="font-size:12px;"></span>
+<input type="text" name="regno" id="regno"  class="form-control" required="required">
+<!-- <span id="user-reg-availability" style="font-size:12px;"></span> -->
 </div>
 </div>
 
@@ -447,8 +437,7 @@ while($row=$res->fetch_object())
         });
     });
 </script>
-
-	<script>
+<script>
 function checkAvailability() {
 $("#loaderIcon").show();
 jQuery.ajax({
@@ -464,7 +453,7 @@ error:function (){}
 }
 </script>
 
-	<script>
+	<!-- <script>
 function checkAvailability() {
 
 $("#loaderIcon").show();
@@ -503,6 +492,6 @@ alert('error');
 }
 });
 }
-</script>
+</script> -->
 
 </html>
