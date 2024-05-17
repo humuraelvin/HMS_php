@@ -130,7 +130,7 @@ return true;
 		<div class="form-group">
 		<label class="col-sm-2 control-label">Contact No : </label>
 		<div class="col-sm-8">
-		<input type="text" name="contact" id="contact"  class="form-control" required="required">
+		<input type="number" name="contact" id="contact"  class="form-control" required="required">
 		</div>
 		</div>
 
