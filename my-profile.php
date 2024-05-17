@@ -1,6 +1,12 @@
 <?php
 session_start();
-include('includes/config.php');
+
+$mysqli = new mysqli('localhost', 'root', '', 'hostel', 3306);
+
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
 date_default_timezone_set('Asia/Kolkata');
 include('includes/checklogin.php');
 check_login();
@@ -15,7 +21,7 @@ if (isset($_POST['update'])) {
     $contactno = $_POST['contact'];
     $udate = date('d-m-Y h:i:s', time());
 
-    $query = "UPDATE userRegistration SET firstName=?, middleName=?, lastName=?, gender=?, contactNo=?, updationDate=? WHERE id=?";
+    $query = "UPDATE userregistration SET firstName=?, middleName=?, lastName=?, gender=?, contactNo=?, updationDate=? WHERE id=?";
     $stmt = $mysqli->prepare($query);
 
     if ($stmt) {
