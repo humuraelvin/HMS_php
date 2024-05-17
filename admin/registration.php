@@ -226,7 +226,8 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Registration No : </label>
 <div class="col-sm-8">
-<input type="text" name="regno" id="regno"  class="form-control" required="required"  onBlur="checkRegnoAvailability()">
+<!-- onBlur="checkRegnoAvailability()" -->
+<input type="text" name="regno" id="regno"  class="form-control" required="required"  >
 <span id="user-reg-availability" style="font-size:12px;"></span>
 </div>
 </div>
@@ -276,7 +277,8 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Email id : </label>
 <div class="col-sm-8">
-<input type="email" name="email" id="email"  class="form-control" onBlur="checkAvailability()" required="required">
+ <!-- onBlur="checkAvailability()"  -->
+<input type="email" name="email" id="email"  class="form-control" required="required">
 <span id="user-availability-status" style="font-size:12px;"></span>
 </div>
 </div>
