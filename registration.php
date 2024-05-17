@@ -11,17 +11,6 @@ $gender=$_POST['gender'];
 $contactno=$_POST['contact'];
 $emailid=$_POST['email'];
 $password=$_POST['password'];
-// 	$result ="SELECT count(*) FROM userRegistration WHERE email=? || regNo=?";
-// 		$stmt = $mysqli->prepare($result);
-// 		$stmt->bind_param('ss',$email,$regno);
-// 		$stmt->execute();
-// $stmt->bind_result($count);
-// $stmt->fetch();
-// $stmt->close();
-// if($count>0)
-// {
-// echo"<script>alert('Registration number or email id already registered.');</script>";
-// }else{
 
 $query="insert into  userRegistration(regNo,firstName,middleName,lastName,gender,contactNo,email,password) values(?,?,?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
@@ -29,7 +18,7 @@ $rc=$stmt->bind_param('sssssiss',$regno,$fname,$mname,$lname,$gender,$contactno,
 $stmt->execute();
 echo"<script>alert('Student Succssfully register');</script>";
 }
-//}
+
 ?>
 
 <!doctype html>
@@ -90,9 +79,9 @@ return true;
 <div class="form-group">
 <label class="col-sm-2 control-label"> Registration No : </label>
 <div class="col-sm-8">
-<!-- onBlur="checkRegnoAvailability()" -->
+
 <input type="text" name="regno" id="regno"  class="form-control" required="required">
-<!-- <span id="user-reg-availability" style="font-size:12px;"></span> -->
+
 </div>
 </div>
 
