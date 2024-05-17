@@ -89,7 +89,7 @@ type: "POST",
 url: "get_seater.php",
 data:'roomid='+val,
 success: function(data){
-//alert(data);
+
 $('#seater').val(data);
 }
 });
@@ -99,7 +99,7 @@ type: "POST",
 url: "get_seater.php",
 data:'rid='+val,
 success: function(data){
-//alert(data);
+
 $('#fpm').val(data);
 }
 });
