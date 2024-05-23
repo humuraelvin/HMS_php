@@ -1,32 +1,31 @@
 <?php
-    session_start();
-    include_once "config.php";
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    if(!empty($email) && !empty($password)){
-        $sql = mysqli_query($conn, "SELECT * FROM users WHERE email = '{$email}'");
-        if(mysqli_num_rows($sql) > 0){
-            $row = mysqli_fetch_assoc($sql);
-            $user_pass = md5($password);
-            $enc_pass = $row['password'];
-            if($user_pass === $enc_pass){
-                $status = "Active now";
-                $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
-                if($sql2){
-                    $_SESSION['unique_id'] = $row['unique_id'];
-                    echo "success";
-                }else{
-                    echo "Something went wrong. Please try again!";
-                }
-            }else{
-                echo "Email or Password is Incorrect!";
-            }
-        }else{
-            echo "$email - This email not Exist!";
-        }
-    }else{
-        echo "All input fields are required!";
-    }
+
+$conn = new mysqli('localhost', 'root', '', 'hostel');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+ 
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $sql = "SELECT * FROM user WHERE username = '".$email."' AND '".$password."' ";
+
+  $result = mysqli_query($conn, $sql);
+
+  $row = mysqli_fetch_array($result);
+
+  if ($row['usertype'] == "student") {
+     header("location:dashboard.php");
+  }elseif ($row['usertype'] == "admin") {
+     header("location:admin/dashboard.php");
+  }else {
+     echo "<script type='text/javascript'>
+        
+     </script>";
+  }
+  
+}
+
+
 ?>
 
 <!doctype html>
@@ -184,7 +183,7 @@
           <form action="#" method='POST' auto-complete='off'>
             <div class="error-txt"></div>
             <div class="field input">
-              <label>Email Adress / User-name</label>
+              <label>Email Adress</label>
               <input type="text" name="email" id="" placeholder="Enter your email or user name" />
             </div>
             <div class="field input">
