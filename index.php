@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $row = mysqli_fetch_array($result);
 
-  if ($row['usertype'] == "student") {
+  if ($row['usertype'] == "user") {
      header("location:dashboard.php");
   } elseif ($row['usertype'] == "admin") {
      header("location:admin/dashboard.php");
