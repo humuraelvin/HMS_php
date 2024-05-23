@@ -5,7 +5,7 @@ if(isset($_POST['login']))
 {
 $email=$_POST['email'];
 $contact=$_POST['contact'];
-$stmt=$mysqli->prepare("SELECT email,contactNo,password FROM userregistration WHERE (email=? && contactNo=?) ");
+$stmt=$mysqli->prepare("SELECT email,contact,password FROM users WHERE (email=? && contactNo=?) ");
 				$stmt->bind_param('ss',$email,$contact);
 				$stmt->execute();
 				$stmt -> bind_result($username,$email,$password);

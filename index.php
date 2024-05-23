@@ -1,31 +1,40 @@
 <?php
+session_start();
 
-$conn = new mysqli('localhost', 'root', '', 'hostel');
+$host = 'localhost';
+
+$user = 'root';
+
+$password = '';
+
+$db_name = 'hostel';
+
+$port = 3306;
+
+$conn = mysqli_connect($host, $user, $password, $db_name, $port);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
- 
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $sql = "SELECT * FROM user WHERE username = '".$email."' AND '".$password."' ";
-
-  $result = mysqli_query($conn, $sql);
+  $sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("ss", $email, $password);
+  $stmt->execute();
+  $result = $stmt->get_result();
 
   $row = mysqli_fetch_array($result);
 
   if ($row['usertype'] == "student") {
      header("location:dashboard.php");
-  }elseif ($row['usertype'] == "admin") {
+  } elseif ($row['usertype'] == "admin") {
      header("location:admin/dashboard.php");
-  }else {
+  } else {
      echo "<script type='text/javascript'>
-        
+        window.alert('Invalid credentials provided');
      </script>";
   }
-  
 }
-
-
 ?>
 
 <!doctype html>
@@ -184,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="error-txt"></div>
             <div class="field input">
               <label>Email Adress</label>
-              <input type="text" name="email" id="" placeholder="Enter your email or user name" />
+              <input type="text" name="email" id="" placeholder="Enter your email" />
             </div>
             <div class="field input">
               <label>Password</label>
@@ -202,6 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
           </form>
           <div class="link">Not yet signed up? <a href="registration.php">Signup now</a></div>
+          <div class="link">Forgot you password? <a href="forgot-password.php">Try another way</a></div>
         </section>
     </div>
   </body>
