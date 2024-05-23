@@ -5,38 +5,8 @@ if(isset($_POST['login']))
 {
 $emailreg=$_POST['emailreg'];
 $password=$_POST['password'];
-$stmt=$mysqli->prepare("SELECT email,password,id FROM userregistration WHERE (email=? || regNo=?) and password=? ");
-				$stmt->bind_param('sss',$emailreg,$emailreg,$password);
-				$stmt->execute();
-				$stmt -> bind_result($email,$password,$id);
-				$rs=$stmt->fetch();
-				$stmt->close();
-				$_SESSION['id']=$id;
-				$_SESSION['login']=$emailreg;
-				$uip=$_SERVER['REMOTE_ADDR'];
-				$ldate=date('d/m/Y h:i:s', time());
-				if($rs)
-				{
-             $uid=$_SESSION['id'];
-             $uemail=$_SESSION['login'];
-$ip=$_SERVER['REMOTE_ADDR'];
-$geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip;
-$addrDetailsArr = unserialize(file_get_contents($geopluginURL));
-$city = $addrDetailsArr['geoplugin_city'];
-$country = $addrDetailsArr['geoplugin_countryName'];
-$log="insert into userLog(userId,userEmail,userIp,city,country) values('$uid','$uemail','$ip','$city','$country')";
-$insertion_success = $mysqli->query($log);
-if($insertion_success)
-{
-header("location:dashboard.php");
-				}
 }
-				else
-				{
-					echo "<script>alert('Invalid Username/Email or password');</script>";
-				}
-			}
-				?>
+?>
 
 <!doctype html>
 <html lang="en" class="no-js">
@@ -47,81 +17,177 @@ header("location:dashboard.php");
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-	<title>Student Hostel Registration</title>
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">>
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
-<script type="text/javascript" src="js/validation.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-function valid()
-{
-if(document.registration.password.value!= document.registration.cpassword.value)
-{
-alert("Password and Re-Type Password Field do not match  !!");
-document.registration.cpassword.focus();
-return false;
-}
-return true;
-}
-</script>
+	<title>User or Admin Login</title>
+	<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #f7f7f7;
+      }
+
+      .wrapper {
+        background: #fff;
+        width: 450px;
+        border-radius: 16px;
+        box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+          0 32px 64px -48px rgba(0, 0, 0, 0.5);
+      }
+
+      .form {
+        padding: 25px 30px;
+      }
+
+      .form header {
+        font-size: 25px;
+        font-weight: 600;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e6e6e6;
+      }
+
+      .form form {
+        margin: 20px 0;
+      }
+
+      .form form .error-txt {
+        color: #721c24;
+        background: #f8d7da;
+        padding: 8px 10px;
+        text-align: center;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #f5c6cb;
+        display: none;
+      }
+
+      .form form .name-details {
+        display: flex;
+      }
+
+      form .name-details .field:first-child {
+        margin-right: 10px;
+      }
+
+      form .name-details .field:last-child {
+        margin-left: 10px;
+      }
+
+      .form form .field {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-bottom: 10px;
+      }
+
+      .form form .field label {
+        margin-bottom: 2px;
+      }
+
+      .form form .field input {
+        outline: none;
+      }
+
+      .form form .input input {
+        height: 40px;
+        width: 100%;
+        font-size: 16px;
+        padding: 0 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .form form .image input {
+        font-size: 17px;
+      }
+
+      .form form .button input {
+        margin-top: 13px;
+        height: 45px;
+        border: none;
+        font-size: 17px;
+        font-weight: 400;
+        background: #333;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .form form .field i {
+        position: absolute;
+        right: 15px;
+        color: #ccc;
+        top: 70%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+
+      .form form .field i.active::before {
+        color: #333;
+        content: "\f070";
+      }
+
+      .form .link {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 17px;
+      }
+
+      .form .link a {
+        color: #333;
+      }
+
+      .form .link a:hover {
+        text-decoration: underline;
+      }
+    </style>
 </head>
 <body>
-	<?php include('includes/header.php');?>
-	<div class="ts-main-content">
-		<?php include('includes/sidebar.php');?>
-		<div class="content-wrapper">
-			<div class="container-fluid">
 
-				<div class="row">
-					<div class="col-md-12">
-					
-						<h2 class="page-title">User Login </h2>
 
-						<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<div class="well row pt-2x pb-3x bk-light">
-							<div class="col-md-8 col-md-offset-2">
-							
-								<form action="" class="mt" method="post">
-									<label for="" class="text-uppercase text-sm">Email / Registration Number</label>
-									<input type="text" placeholder="Email / Registration Number" name="emailreg" class="form-control mb" required="true">
-									<label for="" class="text-uppercase text-sm">Password</label>
-									<input type="password" placeholder="Password" name="password" class="form-control mb" required="true">
-									
+	 <div class="wrapper">
+        <section class="form login">
+          <header>Login To your Account</header>
+          <form action="#">
+            <div class="error-txt"></div>
+            <div class="field input">
+              <label>Email Adress / User-name</label>
+              <input type="text" name="email" id="" placeholder="Enter your email or user name" />
+            </div>
+            <div class="field input">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                id=""
+                placeholder="Enter a your password"
+              />
+              <i class="fas fa-eye"></i>
+            </div>
 
-									<input type="submit" name="login" class="btn btn-primary btn-block" value="login" >
-								</form>
-							</div>
-						</div>
-						<div class="text-center text-light" style="color:black;">
-							<a href="forgot-password.php" style="color:black;">Forgot password?</a>
-						</div>
-					</div>
-				</div>
-						</div>
-							</div>
-						</div>
-					</div>
-				</div> 	
-			</div>
-		</div>
-	</div>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script src="js/fileinput.js"></script>
-	<script src="js/chartData.js"></script>
-	<script src="js/main.js"></script>
+            <div class="field button">
+              <input type="submit" value="Log in" />
+            </div>
+          </form>
+          <div class="link">Not yet signed up? <a href="registration.php">Signup now</a></div>
+        </section>
+    </div>
+  </body>
+
+  <script src="./js/pass-show-hide.js"></script>
+
 </body>
 
 </html>
