@@ -16,7 +16,7 @@ $contactno=$_POST['contact'];
 $emailid=$_POST['email'];
 $password=$_POST['password'];
 
-$query="insert into  userregistration(regNo,firstName,lastName,gender,contactNo,email,password) values(?,?,?,?,?,?,?,?)";
+$query="insert into  users(regNo,firstName,lastName,gender,contactNo,email,password) values(?,?,?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
 $rc=$stmt->bind_param('sssssiss',$regno,$fname,$mname,$lname,$gender,$contactno,$emailid,$password);
 $result = $stmt->execute();
