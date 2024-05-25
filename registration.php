@@ -1,6 +1,4 @@
 
-
-
 <?php
 
 $mysqliher = new mysqli('localhost', 'root', '', 'hostel');
@@ -9,7 +7,6 @@ if ($mysqliher->connect_error) {
     exit("Connection failed: " . $mysqliher->connect_error);
 }
 
-// session_start();
 if(isset($_POST['submit']))
 {
 $fname=$_POST['fname'];
@@ -18,7 +15,7 @@ $gender=$_POST['gender'];
 $contactno=$_POST['contact'];
 $emailid=$_POST['email'];
 $password=$_POST['password'];
-$query="INSERT INTO  users(firstName,lastName,gender,contactNo,email,passwo,usertype) values(?,?,?,?,?,?,?)";
+$query="INSERT INTO  users(firstName,lastName,gender,contactNo,email,password,usertype) values(?,?,?,?,?,?,?)";
 $rc=$stmt->bind_param('sssiss',$fname,$lname,$gender,$contactno,$emailid,$password,"user");
 $stmt = $mysqliher->query($query);
 
