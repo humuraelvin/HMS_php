@@ -1,12 +1,15 @@
 
-<?php
-$mysqli = new mysqli('localhost', 'root', '', 'hostel');
 
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
+
+<?php
+
+$mysqliher = new mysqli('localhost', 'root', '', 'hostel');
+
+if ($mysqliher->connect_error) {
+    exit("Connection failed: " . $mysqliher->connect_error);
 }
 
-session_start();
+// session_start();
 if(isset($_POST['submit']))
 {
 $fname=$_POST['fname'];
@@ -15,12 +18,13 @@ $gender=$_POST['gender'];
 $contactno=$_POST['contact'];
 $emailid=$_POST['email'];
 $password=$_POST['password'];
+$query="INSERT INTO  users(firstName,lastName,gender,contactNo,email,passwo,usertype) values(?,?,?,?,?,?,?)";
+$rc=$stmt->bind_param('sssiss',$fname,$lname,$gender,$contactno,$emailid,$password,"user");
+$stmt = $mysqliher->query($query);
 
-$query="insert into  users(regNo,firstName,lastName,gender,contactNo,email,password) values(?,?,?,?,?,?,?,?)";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('sssssiss',$regno,$fname,$mname,$lname,$gender,$contactno,$emailid,$password);
 $result = $stmt->execute();
 if ($result) {
+  echo $result;
 	echo"<script>alert('Student Succssfully register');</script>";
 }else {
 	echo"<script>alert('Unexpected error prevented registration - Please try again');</script>";
@@ -198,7 +202,7 @@ return true;
 	 <div class="wrapper">
         <section class="form signup">
         <header>User Registration</header>
-          <form action="#" method="POST" name="registration" enctype='multipart/form-data' auto-complete='off' onSubmit='return valid()'>
+          <form action="registration.php" method="POST" name="registration" enctype='multipart/form-data' auto-complete='off' onSubmit='return valid()'>
             <div class="error-txt"></div>
             <div class="name-details">
               <div class="field input">
@@ -219,10 +223,10 @@ return true;
 			<label>Gender : </label>
 			<div class="field input">
 				<select style="height:3rem; border: 1px solid #ccc; border-radius" name="gender" class="form-control" required="required">
-				<option value="">Select Gender</option>
-				<option value="male">Male</option>
-				<option value="female">Female</option>
-				<option value="others">Others</option>
+				<option name="gender" value="">Select Gender</option>
+				<option name="gender" value="male">Male</option>
+				<option name="gender" value="female">Female</option>
+				<option name="gender" value="others">Others</option>
 				</select>
 			</div>
 			</div>
@@ -253,7 +257,7 @@ return true;
             </div>
            
             <div class="field button">
-              <input type="submit" value="Signup" />
+              <input type="submit" name="submit" value="Signup" />
             </div>
           </form>
           <div class="link">Arleady signed up? <a href="index.php">Login now</a></div>
